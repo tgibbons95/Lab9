@@ -10,11 +10,13 @@
 using namespace std;
 
 class Signal{
+	//friend Signal operator+(Signal,Signal);
+	
 	private:
 		vector<int> signalData;	//original data
 		int Max;
-		int Length;
 		double average;
+		int Length;
 		
 		vector<double> alteredData;	//altered data
 		double alteredMax;
@@ -229,6 +231,7 @@ void Signal::choiceSelect(int choice){
 			displayOptions();
 			break;
 		case 9:
+			dataReset();
 			break;
 		default:
 			cout	<<	"\nInvalid choice. Try again: ";
@@ -254,6 +257,24 @@ void Signal::saveFile(string filename){
 	
 	std::cout << std::endl << filename << " has been saved\n";
 }
+
+/*Signal operator+(const Signal &lhs, const Signal &rhs){
+	Signal sum;
+	int temp=lhs.Length;
+	if(lhs.Length==rhs.Length){
+		while(temp>0){
+			sum.signalData[temp-1]=lhs.signalData[temp-1]+rhs.signalData[temp-1];
+			sum.alteredData[temp-1]=sum.signalData[temp-1];
+		}
+		sum.Max=(lhs.Max>rhs.max)?lhs.Max:rhs.Max;
+		sum.alteredMax=sum.Max;
+		sum.average=(lhs.average+rhs.average)/2;
+		sum.alteredAverage=sum.average;
+	}
+	else	
+		cout<<"Different Lengths of Data cannot be added";
+	return sum;
+}*/
 
 int main(int argc, char** argv){
 	if (argc!=3){	//show help and quit
@@ -287,7 +308,13 @@ int main(int argc, char** argv){
 		dataSample.choiceSelect(choice);
 	}
 	
-		std::cout << "\n";
+	std::cout << "\n";
+	/*Signal dataSample2=dataSample;
+	Signal newSample=operator+(dataSample, dataSample2);
+	
+	dataSample.Sig_info();
+	newSample.Sig_info();*/
+	
 	return 0;
 }
 
